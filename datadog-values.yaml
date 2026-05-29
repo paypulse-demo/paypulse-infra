@@ -1,0 +1,35 @@
+datadog:
+  apiKeyExistingSecret: datadog-secret
+  site: datadoghq.eu  # IMPORTANT: EU site since you're in Lisbon
+  clusterName: paypulse-demo-aks
+
+  tags:
+    - "env:demo"
+    - "project:paypulse"
+
+  # Enable APM (traces)
+  apm:
+    portEnabled: true
+    socketEnabled: true
+
+  # Enable log collection
+  logs:
+    enabled: true
+    containerCollectAll: true
+
+  # Enable process collection
+  processAgent:
+    enabled: true
+
+  # Enable system probe (network, file, etc.)
+  systemProbe:
+    enabled: false  # Adds overhead, not needed for demo
+
+  # Kubernetes state metrics
+  kubeStateMetricsEnabled: true
+
+clusterAgent:
+  enabled: true
+  replicas: 1
+  metricsProvider:
+    enabled: true  # Lets HPA use Datadog metrics if you want
